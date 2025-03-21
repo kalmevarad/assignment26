@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .student-card{
+            border: 2px solid black;
+            border-radius: 20px;
+            box-shadow: 10px 10px 10px ;
+            padding: 10px 40px;
+            margin: 20px 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>student card</h1>
+    <div id="student-container"> </div>
+
+
+    <script>
+
+        const students = [
+            "vivek",
+            "yash",
+            "rushi",
+            "sarthak",
+            "sujal",
+            "raj"
+        ];
+
+        const studentContainer = document.getElementById("student-container");
+
+        for (let i=1; i<students.length; i++) {
+            studentContainer.innerHTML += `<div class="student-card">${students[i]}</div>`;
+        }
+
+        students.push("ram");
+        console.log(students);
+
+    </script>
+</body>
+</html>

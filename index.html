@@ -3,64 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Cards</title>
     <style>
-        .student-card{
-            border: 2px solid black;
-            border-radius: 20px;
-            box-shadow: 10px 10px 10px ;
-            padding: 10px 40px;
-            margin: 20px 40px;
+        .student-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
+        .student-card {
+            padding: 10px;
+            background-color: lightblue;
+            border: 1px solid #000;
+            border-radius: 5px;
+            width: 150px;
+            text-align: center;
+        }
+        button {
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>student card</h1>
-    <div id="student-container"> </div>
 
+    <h1>Student Cards</h1>
+    
+    <input type="text" id="studentInput" placeholder="Enter student name">
+    <button onclick="addStudent()">Add Student</button>
+
+    <div id="student-container" class="student-container"></div>
 
     <script>
+        
+        let students = ["Vivek", "Yash", "Rushi", "Sarthak", "Sujal", "Raj"];
 
-        const students = [
-            "vivek",
-            "yash",
-            "rushi",
-            "sarthak",
-            "sujal",
-            "raj"
-        ];
-
-        const studentContainer = document.getElementById("student-container");
-
-        for (let i=1; i<students.length; i++) {
-            studentContainer.innerHTML += `<div class="student-card">${students[i]}</div>`;
+        function renderStudents() {
+            const studentContainer = document.getElementById("student-container");
+            studentContainer.innerHTML = ""; 
+            
+            students.forEach((student, index) => {
+                const studentCard = document.createElement("div");
+                studentCard.className = "student-card";
+                studentCard.innerHTML = `
+                    <p>${student}</p>
+                    <button onclick="removeStudent(${index})">Remove</button>
+                `;
+                studentContainer.appendChild(studentCard);
+            });
         }
 
-        const ans = prompt("Do you you want to insert/remove student ?(enter yes or no)");
-        if (ans == yes) {
-            const key = prompt("what do you want to do insert/remove?");
-
-            if (key == insert) {
-                const num = parseInt("how many student you want to insert");
-                for (let i=1; i<=num; i++) {
-                    const name = prompt(`enter the name of student ${i}`);
-                    students.push(name);
-                }
-            }
-            else if (key == remove) {
-                const num = parseInt("how many student you want to remove");
-                const ind = parseInt("enter the index from where you want to remove students");
-
-                students.slice(ind, num)
+        function addStudent() {
+            const input = document.getElementById("studentInput");
+            const newStudent = input.value.trim();
+            if (newStudent) {
+                students.push(newStudent);
+                input.value = ""; 
+                renderStudents(); 
             }
         }
 
-        studentContainer.innerHTML += `<h1> array after insert/remove</h1>`;
-        for (let i=1; i<students.length; i++) {
-            studentContainer.innerHTML += `<div class="student-card">${students[i]}</div>`;
+        function removeStudent(index) {
+            students.splice(index, 1);
+            renderStudents(); 
         }
 
+        renderStudents();
     </script>
+
 </body>
 </html>
